@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\HealthXDE.Abstractions\HealthXDE.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\..\HealthXDE.Infrastructure\HealthXDE.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\..\PatientRegistry\PatientRegistry.Infrastructure.Abstractions\PatientRegistry.Infrastructure.Abstractions.csproj" />
+    <ProjectReference Include="..\CustomPatientRegistry.Domain\CustomPatientRegistry.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
