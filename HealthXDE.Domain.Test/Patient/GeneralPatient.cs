@@ -5,7 +5,10 @@ namespace HealthXDE.Domain.Test.Patient;
 
 internal class GeneralPatient : PatientBase
 {
-    public GeneralPatient(PatientId id) : base(id) { }
+    public GeneralPatient(PatientId id) : base(id)
+    {
+        GenderElement.SetValidator(new AdministrativeGenderCodeValidator(new AdministrativeGenderValueSetR5()));
+    }
 
     public Active? Active
     {

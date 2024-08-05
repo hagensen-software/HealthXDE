@@ -8,3 +8,7 @@ public record DeceasedDateTime(DateTimeOffset Value) : IDeceasedValue;
 
 public record Active(bool Value);
 public record BirthDate(DateOnly Value);
+
+public interface IMultipleBirthValue;
+public record MultipleBirthBoolean(bool Value) : IMultipleBirthValue;
+public record MultipleBirthInteger(int Value) : IMultipleBirthValue;

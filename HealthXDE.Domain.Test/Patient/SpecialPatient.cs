@@ -5,16 +5,39 @@ namespace HealthXDE.Domain.Test.Patient;
 
 internal record SpecialActive(bool Value, string Special) : Active(Value);
 
+//internal class SpecialAdministrativeGenderValueSet : ValueSet<AdministrativeGenderCode>
+//{
+//    public SpecialAdministrativeGenderValueSet()
+//        : base(true) { }
+
+//    /// <summary>
+//    /// Male
+//    /// </summary>
+//    public readonly AdministrativeGenderCode Male = CreateCode("male", "Male");
+//    /// <summary>
+//    /// Female
+//    /// </summary>
+//    public readonly AdministrativeGenderCode Female = CreateCode("female", "Female");
+
+//    private static AdministrativeGenderCode CreateCode(string code, string display)
+//    {
+//        return AddCodingValue(new AdministrativeGenderCode(code));
+//    }
+//}
+
 internal class SpecialAdministrativeGenderValueSet : AdministrativeGenderValueSetR5
 {
+    internal static readonly string[] sourceArray = ["male", "female"];
+
+    protected override Func<AdministrativeGenderCoding, bool> GetFilter()
+    {
+        return c => sourceArray.Contains(c.Code?.Symbol);
+    }
 }
 
 internal record SpecialAdministrativeGender : AdministrativeGenderCode
 {
-    static SpecialAdministrativeGender()
-    {
-        AdministrativeGenderValueSet.OverrideR5ValueSet(new SpecialAdministrativeGenderValueSet());
-    }
+    private static readonly SpecialAdministrativeGenderValueSet specialAdministrativeGenderValueSet = new();
 
     public SpecialAdministrativeGender(string Symbol)
         : base(Symbol) { }

@@ -7,8 +7,8 @@ public class CustomPatient : PatientBase
     public CustomPatient(PatientId id, CustomHumanName name)
         : base(id)
     {
-        HumanNameElements.AddElement(name);
+        NameElements.AddElement(name);
     }
 
-    public CustomHumanName Name => HumanNameElements.GetElements<CustomHumanName>().First();
+    public CustomHumanName Name => NameElements.GetElements<CustomHumanName>().First();
 }

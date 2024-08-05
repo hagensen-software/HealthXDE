@@ -28,7 +28,7 @@ public class Patient : PatientBase
         if (newName.Start == null)
             throw new ArgumentException("No start date provided for ChangePatientName", nameof(newName));
 
-        var overlappingNames = HumanNameElements.GetElements<PreviousName>().Where(n => n.Period.Overlaps(new Period(newName.Start, null)));
+        var overlappingNames = NameElements.GetElements<PreviousName>().Where(n => n.Period.Overlaps(new Period(newName.Start, null)));
         if (overlappingNames.Count() > 1)
             throw new InvalidOperationException("Cannot change patient name when it overlaps multiple previous names in time");
 
@@ -39,16 +39,16 @@ public class Patient : PatientBase
 
     public OfficialName Name
     {
-        get => HumanNameElements.GetElements<OfficialName>().First();
+        get => NameElements.GetElements<OfficialName>().First();
         internal set
         {
             var start = value.Start ?? throw new InvalidOperationException("No start date provided for ChangePatientName");
 
-            HumanNameElements
+            NameElements
                 .ChangeElement((OfficialName officialName) => new PreviousName(officialName, start))
                 .AddElement(value);
         }
     }
 
-    public IReadOnlyList<PreviousName> PreviousNames => HumanNameElements.GetElements<PreviousName>();
+    public IReadOnlyList<PreviousName> PreviousNames => NameElements.GetElements<PreviousName>();
 }

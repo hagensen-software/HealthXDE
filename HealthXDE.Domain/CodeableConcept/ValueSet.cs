@@ -1,8 +1,11 @@
-﻿using System.Collections.Immutable;
+﻿using HealthXDE.Domain.Abstractions;
+using HealthXDE.Domain.Exceptions;
+using System.Collections.Immutable;
 
 namespace HealthXDE.Domain.CodeableConcept;
 
-public class ValueSet<CodingType> where CodingType : CodingBase
+public class ValueSet<CodingType> : IValidator<CodingType>
+    where CodingType : CodedValue
 {
     private readonly bool required;
     protected static readonly List<CodingType> codingValues = [];
@@ -12,11 +15,11 @@ public class ValueSet<CodingType> where CodingType : CodingBase
         this.required = required;
     }
 
-    protected virtual Func<CodingBase, bool> GetFilter() => c => true;
+    protected virtual Func<CodingType, bool> GetFilter() => c => true;
     protected virtual ImmutableList<CodingType> GetExtensions() => [];
     protected virtual CodingType? MapCode(Code code) => null;
 
-    internal static CodingType AddCodingValue(CodingType codingValue)
+    protected static CodingType AddCodingValue(CodingType codingValue)
     {
         codingValues.Add(codingValue);
         return codingValue;
@@ -34,7 +37,7 @@ public class ValueSet<CodingType> where CodingType : CodingBase
 
     public CodingType Lookup(Code code)
     {
-        var result = GetCodingValues().FirstOrDefault(c => c.GetCode() == code);
+        var result = GetCodingValues().FirstOrDefault(c => CodedValue.GetCodeSymbol(c) == code.Symbol);
         if (!required)
             result ??= MapCode(code);
 
@@ -44,6 +47,12 @@ public class ValueSet<CodingType> where CodingType : CodingBase
     public bool IsValid(CodingType coding)
     {
         var values = GetCodingValues();
-        return values.Any(c => coding.Matches(c));
+        return values.Exists(c => coding.Matches(c));
+    }
+
+    public void Validate(CodingType coding)
+    {
+        if (!IsValid(coding))
+            throw new InvalidCodingException($"Code '{CodedValue.GetCodeSymbol(coding)}' is not a valid code");
     }
 }

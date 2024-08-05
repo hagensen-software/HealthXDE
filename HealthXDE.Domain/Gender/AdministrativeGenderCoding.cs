@@ -1,9 +1,8 @@
-﻿using HealthXDE.Domain.Abstractions;
-using HealthXDE.Domain.CodeableConcept;
+﻿using HealthXDE.Domain.CodeableConcept;
 
 namespace HealthXDE.Domain.Gender;
 
-public record AdministrativeGenderCoding : Coding, IValidate
+public record AdministrativeGenderCoding : Coding
 {
     public static readonly AdministrativeGenderValueSet ValueSets = new();
 
@@ -23,11 +22,5 @@ public record AdministrativeGenderCoding : Coding, IValidate
     public static explicit operator AdministrativeGenderCoding(AdministrativeGenderCode administrativeGenderCode)
     {
         return new AdministrativeGenderCoding(null, null, administrativeGenderCode, null, null);
-    }
-
-    public void Validate()
-    {
-        ThrowIfEmpty();
-        ValueSets.Validate(this);
     }
 }

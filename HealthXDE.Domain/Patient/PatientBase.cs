@@ -16,7 +16,8 @@ public record PatientState(
     Element<BirthDate?> BirthDateElement,
     Element<DeceasedBase?> DeceasedElement,
     Element<AddressBase?> AddressElement,
-    Element<MaritalStatusBase?> MaritalStatus
+    Element<MaritalStatusBase?> MaritalStatus,
+    Element<MultipleBirthBase?> MultipleBirth
 );
 
 public class PatientBase : Entity
@@ -27,22 +28,24 @@ public class PatientBase : Entity
 
     protected ElementList<IdentifierBase> IdentifierElements { get; set; } = new();
     protected Element<Active?> ActiveElement { get; set; } = new();
-    protected ElementList<HumanNameBase> HumanNameElements { get; set; } = new();
+    protected ElementList<HumanNameBase> NameElements { get; set; } = new();
     protected ElementList<ContactPointBase> TelecomElements { get; set; } = new();
     protected Element<AdministrativeGenderCode?> GenderElement { get; set; } = new();
     protected Element<BirthDate?> BirthDateElement { get; set; } = new();
     protected Element<DeceasedBase?> DeceasedElement { get; set; } = new();
     protected Element<AddressBase?> AddressElement { get; set; } = new();
     protected Element<MaritalStatusBase?> MaritalStatusElement { get; set; } = new();
+    protected Element<MultipleBirthBase?> MultipleBirthElement { get; set; } = new();
 
     protected PatientState GetPatientState() => new(
         IdentifierElements,
         ActiveElement,
-        HumanNameElements,
+        NameElements,
         TelecomElements,
         GenderElement,
         BirthDateElement,
         DeceasedElement,
         AddressElement,
-        MaritalStatusElement);
+        MaritalStatusElement,
+        MultipleBirthElement);
 }

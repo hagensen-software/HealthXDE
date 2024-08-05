@@ -29,7 +29,7 @@ public class Patient : PatientBase
 
     public IReadOnlyList<HumanNameType> GetNames<HumanNameType>() where HumanNameType : HumanName
     {
-        return HumanNameElements.GetElements<HumanNameType>();
+        return NameElements.GetElements<HumanNameType>();
     }
 
     public AdministrativeGenderCode? Gender

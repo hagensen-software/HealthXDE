@@ -2,7 +2,7 @@
 
 namespace HealthXDE.Domain.CodeableConcept;
 
-public record CodingBase
+public record CodingBase : CodedValue
 {
     private readonly CodingSystem? system;
     private readonly CodingVersion? version;
@@ -31,15 +31,26 @@ public record CodingBase
     protected internal DisplayValue? GetDisplay() => display;
     protected internal UserSelected? GetUserSelected() => userSelected;
 
-    protected internal virtual bool Matches(CodingBase coding)
+    protected internal override bool Matches(CodedValue codedValue)
     {
-        coding.ThrowIfEmpty();
+        this.ThrowIfEmpty();
+        ThrowIfEmpty(codedValue);
 
-        return
-            ((system is null) || (coding.system?.Uri == system.Uri)) &&
-            ((version is null) || (coding.version?.Version == version.Version)) &&
-            ((code is null) || (coding.code?.Symbol == code.Symbol)) &&
-            ((display is null) || (coding.display?.Text == display.Text)) &&
-            ((userSelected is null) || ((coding.userSelected?.ChosenByUser == userSelected.ChosenByUser)));
+        return codedValue switch
+        {
+            CodingBase codingValue =>
+                ((system is null) || (codingValue.system?.Uri == system.Uri)) &&
+                ((version is null) || (codingValue.version?.Version == version.Version)) &&
+                ((code is null) || (codingValue.code?.Symbol == code.Symbol)) &&
+                ((display is null) || (codingValue.display?.Text == display.Text)) &&
+                ((userSelected is null) || ((codingValue.userSelected?.ChosenByUser == userSelected.ChosenByUser))),
+            Code codeValue => (code is null) || (codeValue.Symbol == code.Symbol),
+            _ => throw new InvalidOperationException("Unkown type of CodedValue received")
+        };
+    }
+
+    private static void ThrowIfEmpty(CodedValue codedValue)
+    {
+        _ = CodedValue.GetCodeSymbol(codedValue);
     }
 }

@@ -16,33 +16,21 @@ public record DeceasedBase
 
     protected DeceasedBoolean? GetDeceased()
     {
-        if (deceasedValue == null)
-            return null;
-
-        switch (deceasedValue)
+        return deceasedValue switch
         {
-            case DeceasedBoolean deceased:
-                return deceased;
-            case DeceasedDateTime deseasedDateTime:
-                return new DeceasedBoolean(true);
-            default:
-                return null;
+            DeceasedBoolean deceased => deceased,
+            DeceasedDateTime => new DeceasedBoolean(true),
+            _ => null,
         };
     }
 
     protected DeceasedDateTime? GetDeceasedDateTime()
     {
-        if (deceasedValue == null)
-            return null;
-
-        switch (deceasedValue)
+        return deceasedValue switch
         {
-            case DeceasedBoolean deceased:
-                throw new InvalidOperationException("Cannot convert Deceased boolean to DeceasedDateTime");
-            case DeceasedDateTime deseasedDateTime:
-                return deseasedDateTime;
-            default:
-                return null;
+            DeceasedBoolean _ => throw new InvalidOperationException("Cannot convert Deceased boolean to DeceasedDateTime"),
+            DeceasedDateTime deseasedDateTime => deseasedDateTime,
+            _ => null,
         };
     }
 }
