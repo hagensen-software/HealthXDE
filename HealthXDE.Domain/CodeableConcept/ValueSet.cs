@@ -4,8 +4,8 @@ using System.Collections.Immutable;
 
 namespace HealthXDE.Domain.CodeableConcept;
 
-public class ValueSet<CodingType> : IValidator<CodingType>
-    where CodingType : CodedValue
+public class ValueSet<CodingType> : IValidator
+    where CodingType : CodingBase
 {
     private readonly bool required;
     protected static readonly List<CodingType> codingValues = [];
@@ -37,22 +37,22 @@ public class ValueSet<CodingType> : IValidator<CodingType>
 
     public CodingType Lookup(Code code)
     {
-        var result = GetCodingValues().FirstOrDefault(c => CodedValue.GetCodeSymbol(c) == code.Symbol);
+        var result = GetCodingValues().FirstOrDefault(c => c.GetCode() == code);
         if (!required)
             result ??= MapCode(code);
 
         return result ?? throw new InvalidOperationException($"Not able to lookup code '{code}' - not found and no mapping exists");
     }
 
-    public bool IsValid(CodingType coding)
+    public bool IsValid(SimpleCodingBase coding)
     {
         var values = GetCodingValues();
         return values.Exists(c => coding.Matches(c));
     }
 
-    public void Validate(CodingType coding)
+    public void Validate(SimpleCodingBase coding)
     {
         if (!IsValid(coding))
-            throw new InvalidCodingException($"Code '{CodedValue.GetCodeSymbol(coding)}' is not a valid code");
+            throw new InvalidCodingException($"Code '{coding.GetCode()}' is not a valid code");
     }
 }

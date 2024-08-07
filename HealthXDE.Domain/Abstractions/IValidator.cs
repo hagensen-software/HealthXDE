@@ -1,6 +1,8 @@
-﻿namespace HealthXDE.Domain.Abstractions;
+﻿using HealthXDE.Domain.CodeableConcept;
 
-public interface IValidator<ElementType>
+namespace HealthXDE.Domain.Abstractions;
+
+public interface IValidator
 {
-    void Validate(ElementType val);
+    void Validate(SimpleCodingBase val);
 }

@@ -7,7 +7,7 @@ internal class GeneralPatient : PatientBase
 {
     public GeneralPatient(PatientId id) : base(id)
     {
-        GenderElement.SetValidator(new AdministrativeGenderCodeValidator(new AdministrativeGenderValueSetR5()));
+        GenderElement.SetValidator(new AdministrativeGenderValueSetR5());
     }
 
     public Active? Active

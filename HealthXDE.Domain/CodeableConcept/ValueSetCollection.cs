@@ -1,7 +1,7 @@
 ﻿namespace HealthXDE.Domain.CodeableConcept;
 
 public class ValueSetCollection<CodingType>(ValueSet<CodingType> r4, ValueSet<CodingType> r5)
-    where CodingType : Coding
+    where CodingType : CodingBase
 {
     private ValueSet<CodingType> r4 = r4;
     private ValueSet<CodingType> r5 = r5;

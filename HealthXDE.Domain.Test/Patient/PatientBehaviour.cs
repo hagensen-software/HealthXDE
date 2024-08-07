@@ -149,7 +149,7 @@ public class PatientBehaviour
         Assert.Throws<InvalidCodingException>(() =>
             new GeneralPatient(patientId)
             {
-                Gender = new AdministrativeGenderCode("someInvalidCode")
+                Gender = new AdministrativeGenderCode(new("someInvalidCode"))
             });
     }
 

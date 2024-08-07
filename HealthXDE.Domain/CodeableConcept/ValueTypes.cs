@@ -4,6 +4,7 @@ public record CodeableConceptText(string Text);
 public record CodingVersion(string Version);
 public record DisplayValue(string Text);
 public record UserSelected(bool ChosenByUser);
+public record Code(string Symbol);
 
 public record CodingSystem(Uri Uri)
 {

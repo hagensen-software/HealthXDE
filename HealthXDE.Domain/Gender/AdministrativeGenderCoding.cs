@@ -16,11 +16,11 @@ public record AdministrativeGenderCoding : Coding
         var code = administrativeGenderCoding.Code;
         return code is null
             ? throw new InvalidOperationException("Cannot convert AdministrativeGenderCoding without code to AdministrativeGenderCode")
-            : new AdministrativeGenderCode(code.Symbol);
+            : new AdministrativeGenderCode(code);
     }
 
     public static explicit operator AdministrativeGenderCoding(AdministrativeGenderCode administrativeGenderCode)
     {
-        return new AdministrativeGenderCoding(null, null, administrativeGenderCode, null, null);
+        return new AdministrativeGenderCoding(null, null, administrativeGenderCode.GetCode(), null, null);
     }
 }

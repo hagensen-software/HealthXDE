@@ -1,10 +1,9 @@
-﻿using HealthXDE.Domain.Abstractions;
-using HealthXDE.Domain.CodeableConcept;
+﻿using HealthXDE.Domain.CodeableConcept;
 
 namespace HealthXDE.Domain.Gender;
 
-public record AdministrativeGenderCode : Code
+public record AdministrativeGenderCode : SimpleCodingBase
 {
-    public AdministrativeGenderCode(string symbol)
-        : base(symbol) { }
+    public AdministrativeGenderCode(Code? code)
+        : base(code) { }
 }
