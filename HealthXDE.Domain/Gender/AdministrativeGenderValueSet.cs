@@ -2,11 +2,32 @@
 
 namespace HealthXDE.Domain.Gender;
 
-public class AdministrativeGenderValueSet : ValueSetCollection<AdministrativeGenderCoding>
+public class AdministrativeGenderValueSet : ValueSet<AdministrativeGenderCoding>
 {
-    public static AdministrativeGenderValueSetR4 R4 = new();
-    public static AdministrativeGenderValueSetR5 R5 = new();
+    public static readonly CodingSystem hl7AdministrativeGender = CodingSystem.FromString("http://hl7.org/fhir/administrative-gender");
 
     public AdministrativeGenderValueSet()
-        : base(R4, R5) { }
+        : base(true) { }
+
+    /// <summary>
+    /// Male
+    /// </summary>
+    public readonly AdministrativeGenderCoding Male = CreateCode("male", "Male");
+    /// <summary>
+    /// Female
+    /// </summary>
+    public readonly AdministrativeGenderCoding Female = CreateCode("female", "Female");
+    /// <summary>
+    /// Other
+    /// </summary>
+    public readonly AdministrativeGenderCoding Other = CreateCode("other", "Other");
+    /// <summary>
+    /// A proper value is applicable, but not known
+    /// </summary>
+    public readonly AdministrativeGenderCoding Unknown = CreateCode("unknown", "Unknown");
+
+    private static AdministrativeGenderCoding CreateCode(string code, string display)
+    {
+        return AddCodingValue(new AdministrativeGenderCoding(hl7AdministrativeGender, null, new(code), new(display), null));
+    }
 }

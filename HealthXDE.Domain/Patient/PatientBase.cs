@@ -24,7 +24,12 @@ public class PatientBase : Entity
 {
     public PatientId Id { get; }
 
-    protected PatientBase(PatientId id) => Id = id;
+    protected PatientBase(PatientId id)
+    {
+        GenderElement.SetValidator(AdministrativeGenderCoding.ValueSet);
+
+        Id = id;
+    }
 
     protected ElementList<IdentifierBase> IdentifierElements { get; set; } = new();
     protected Element<Active?> ActiveElement { get; set; } = new();

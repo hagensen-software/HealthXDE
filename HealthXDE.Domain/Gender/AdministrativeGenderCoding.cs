@@ -4,7 +4,7 @@ namespace HealthXDE.Domain.Gender;
 
 public record AdministrativeGenderCoding : Coding
 {
-    public static readonly AdministrativeGenderValueSet ValueSets = new();
+    public static readonly AdministrativeGenderValueSet ValueSet = new();
 
     public AdministrativeGenderCoding(CodingSystem? system, CodingVersion? version, Code? code, DisplayValue? display, UserSelected? userSelected)
         : base(system, version, code, display, userSelected)

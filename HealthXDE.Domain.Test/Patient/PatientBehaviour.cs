@@ -23,11 +23,11 @@ public class PatientBehaviour
         var patientId = new PatientId(Guid.NewGuid());
         var patient = new GeneralPatient(patientId);
 
-        patient.AddPatientIdentifier(new GeneralPatientIdentifier(IdentifierUse.Official, null, IdentifierSystem.FromString("http://hl7.org/fhir/sid/passport-DNK"), new("123456789"), null));
+        patient.AddPatientIdentifier(new GeneralPatientIdentifier(IdentifierUse.ValueSet.Official, null, IdentifierSystem.FromString("http://hl7.org/fhir/sid/passport-DNK"), new("123456789"), null));
 
         Assert.Collection(patient.Identifiers, i =>
             {
-                Assert.Equal(IdentifierUse.Official, i.IdentifierUse);
+                Assert.Equal(IdentifierUse.ValueSet.Official, i.IdentifierUse);
                 Assert.Equal(new IdentifierValue("123456789"), i.Value);
             });
     }
@@ -135,10 +135,10 @@ public class PatientBehaviour
         var patientId = new PatientId(Guid.NewGuid());
         var patient = new GeneralPatient(patientId)
         {
-            Gender = AdministrativeGenderValueSet.R5.Male
+            Gender = AdministrativeGenderCoding.ValueSet.Male
         };
 
-        Assert.Equal(AdministrativeGenderValueSet.R5.Male, patient.Gender);
+        Assert.Equal(AdministrativeGenderCoding.ValueSet.Male, patient.Gender);
     }
 
     [Fact]
@@ -166,7 +166,7 @@ public class PatientBehaviour
     [Fact]
     public void Given_ASpecialPatient_When_GenderIsAssigned_Then_GenderIsSet()
     {
-        var male = AdministrativeGenderValueSet.R5.Male;
+        var male = AdministrativeGenderCoding.ValueSet.Male;
 
         var patientId = new PatientId(Guid.NewGuid());
         var patient = new SpecialPatient(patientId)

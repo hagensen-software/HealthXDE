@@ -75,7 +75,7 @@ public class PatientRepositoryTest : IAsyncLifetime
             var repository = scope.ServiceProvider.GetRequiredService<IPatientRepository<Patient>>();
 
             var patient = Patient.CreateNewPatient(patientId);
-            patient.ChangeGender(AdministrativeGenderValueSet.R5.Male);
+            patient.ChangeGender(AdministrativeGenderCoding.ValueSet.Male);
             await repository.Add(patient);
             await unitOfWork.SaveChangesAsync(CancellationToken.None);
         }
@@ -87,7 +87,7 @@ public class PatientRepositoryTest : IAsyncLifetime
 
             Assert.NotNull(retrievedPatient);
             Assert.Equal(patientId, retrievedPatient.Id);
-            Assert.Equal(AdministrativeGenderValueSet.R5.Male, retrievedPatient.Gender);
+            Assert.Equal(AdministrativeGenderCoding.ValueSet.Male, retrievedPatient.Gender);
         }
     }
 }

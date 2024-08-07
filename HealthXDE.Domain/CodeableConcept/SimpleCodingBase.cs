@@ -1,8 +1,9 @@
-﻿using HealthXDE.Domain.Exceptions;
+﻿using HealthXDE.Domain.Abstractions;
+using HealthXDE.Domain.Exceptions;
 
 namespace HealthXDE.Domain.CodeableConcept;
 
-public record SimpleCodingBase
+public record SimpleCodingBase : IValidatable
 {
     private readonly Code? code;
 
@@ -25,4 +26,6 @@ public record SimpleCodingBase
 
         return code!.Symbol == codedValue.code!.Symbol;
     }
+
+    public void Validate(IValidator? validator) => validator?.Validate(this);
 }

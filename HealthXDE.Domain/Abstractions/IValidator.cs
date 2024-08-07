@@ -1,8 +1,6 @@
-﻿using HealthXDE.Domain.CodeableConcept;
-
-namespace HealthXDE.Domain.Abstractions;
+﻿namespace HealthXDE.Domain.Abstractions;
 
 public interface IValidator
 {
-    void Validate(SimpleCodingBase val);
+    void Validate(IValidatable val);
 }

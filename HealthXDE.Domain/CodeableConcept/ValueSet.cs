@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 namespace HealthXDE.Domain.CodeableConcept;
 
 public class ValueSet<CodingType> : IValidator
-    where CodingType : CodingBase
+    where CodingType : SimpleCodingBase
 {
     private readonly bool required;
     protected static readonly List<CodingType> codingValues = [];
@@ -50,8 +50,13 @@ public class ValueSet<CodingType> : IValidator
         return values.Exists(c => coding.Matches(c));
     }
 
-    public void Validate(SimpleCodingBase coding)
+    public void Validate(IValidatable validatable)
     {
+        if (validatable == null)
+            return;
+
+        var coding = (validatable as SimpleCodingBase) ?? throw new InvalidOperationException("ValueSets can only validate codes and codings");
+
         if (!IsValid(coding))
             throw new InvalidCodingException($"Code '{coding.GetCode()}' is not a valid code");
     }

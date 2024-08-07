@@ -9,7 +9,7 @@ public class GenderBehavior
     public void Given_AnEmptyAdministrativeGenderCoding_When_Validated_Then_AnExceptionIsThrown()
     {
         var element = new Element<AdministrativeGenderCoding>();
-        element.SetValidator(new AdministrativeGenderValueSetR5());
+        element.SetValidator(new AdministrativeGenderValueSet());
 
         var administrativeGenderCoding = new AdministrativeGenderCoding(null, null, null, null, null);
 
@@ -20,7 +20,7 @@ public class GenderBehavior
     public void Given_AnInvalidAdministrativeGenderCode_When_Validated_Then_AnExceptionIsThrown()
     {
         var element = new Element<AdministrativeGenderCode>();
-        element.SetValidator(new AdministrativeGenderValueSetR5());
+        element.SetValidator(new AdministrativeGenderValueSet());
 
         var administrativeGenderCode = new AdministrativeGenderCode(new("someInvalidCode"));
 
@@ -31,20 +31,20 @@ public class GenderBehavior
     public void Given_AValidAdministrativeGenderCoding_When_Validated_Then_GenderIsUnchanged()
     {
         var element = new Element<AdministrativeGenderCoding>();
-        element.SetValidator(new AdministrativeGenderValueSetR5());
+        element.SetValidator(new AdministrativeGenderValueSet());
 
-        var administrativeGenderCoding = AdministrativeGenderValueSet.R5.Female;
+        var administrativeGenderCoding = AdministrativeGenderCoding.ValueSet.Female;
 
         element.Set(administrativeGenderCoding);
 
-        Assert.Equal(AdministrativeGenderValueSet.R5.Female, administrativeGenderCoding);
+        Assert.Equal(AdministrativeGenderCoding.ValueSet.Female, administrativeGenderCoding);
     }
 
     [Fact]
     public void Given_AnInvalidAdministrativeGenderCoding_When_Validated_Then_AnExceptionIsThrown()
     {
         var element = new Element<AdministrativeGenderCoding>();
-        element.SetValidator(new AdministrativeGenderValueSetR5());
+        element.SetValidator(new AdministrativeGenderValueSet());
 
         var administrativeGenderCoding = new AdministrativeGenderCoding(null, null, new("someInvalidCode"), null, null);
 
@@ -57,11 +57,11 @@ public class GenderBehavior
         var element = new Element<SpecialAdministrativeGender>();
         element.SetValidator(new SpecialAdministrativeGenderValueSet());
 
-        SpecialAdministrativeGender administrativeGenderCoding = new AdministrativeGenderValueSetR5().Male;
+        SpecialAdministrativeGender administrativeGenderCoding = new AdministrativeGenderValueSet().Male;
 
         element.Set(administrativeGenderCoding);
 
-        Assert.Equal(AdministrativeGenderValueSet.R5.Male, administrativeGenderCoding);
+        Assert.Equal(AdministrativeGenderCoding.ValueSet.Male, administrativeGenderCoding);
     }
 
     [Fact]
@@ -70,7 +70,7 @@ public class GenderBehavior
         var element = new Element<SpecialAdministrativeGender>();
         element.SetValidator(new SpecialAdministrativeGenderValueSet());
 
-        SpecialAdministrativeGender administrativeGenderCoding = new AdministrativeGenderValueSetR5().Other;
+        SpecialAdministrativeGender administrativeGenderCoding = new AdministrativeGenderValueSet().Other;
 
         Assert.Throws<InvalidCodingException>(() => element.Set(administrativeGenderCoding));
     }

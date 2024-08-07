@@ -6,7 +6,7 @@ namespace HealthXDE.Domain.Test.Patient;
 
 internal record SpecialActive(bool Value, string Special) : Active(Value);
 
-internal class SpecialAdministrativeGenderValueSet : AdministrativeGenderValueSetR5
+internal class SpecialAdministrativeGenderValueSet : AdministrativeGenderValueSet
 {
     internal static readonly string[] sourceArray = ["male", "female"];
 

@@ -2,8 +2,4 @@
 
 namespace HealthXDE.Domain.Gender;
 
-public record AdministrativeGenderCode : SimpleCodingBase
-{
-    public AdministrativeGenderCode(Code? code)
-        : base(code) { }
-}
+public record AdministrativeGenderCode(Code? Code) : SimpleCodingBase(Code);

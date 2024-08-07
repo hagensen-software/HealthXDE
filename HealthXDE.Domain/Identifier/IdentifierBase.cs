@@ -1,8 +1,9 @@
-﻿using HealthXDE.Domain.DateTime;
+﻿using HealthXDE.Domain.Abstractions;
+using HealthXDE.Domain.DateTime;
 
 namespace HealthXDE.Domain.Identifier;
 
-public record IdentifierBase
+public record IdentifierBase : IValidatable
 {
     private readonly IdentifierUse? use;
     private readonly IdentifierType? type;
@@ -26,4 +27,9 @@ public record IdentifierBase
     protected IdentifierSystem? GetSystem() => system;
     protected IdentifierValue? GetValue() => value;
     protected Period? GetPeriod() => period;
+
+    public void Validate(IValidator? validator = null)
+    {
+        use?.Validate(validator ?? IdentifierUse.ValueSet);
+    }
 }

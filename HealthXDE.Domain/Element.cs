@@ -1,5 +1,4 @@
 ﻿using HealthXDE.Domain.Abstractions;
-using HealthXDE.Domain.CodeableConcept;
 
 namespace HealthXDE.Domain;
 
@@ -11,13 +10,11 @@ public class Element<ElementBaseType>
     public ElementType Get<ElementType>() where ElementType : ElementBaseType => (ElementType)element!;
     public void Set<ElementType>(ElementType val) where ElementType : ElementBaseType
     {
-        if (val is SimpleCodingBase coding)
-            validator?.Validate(coding);
+        if (val is IValidatable validatable)
+            validatable.Validate(validator);
+
         element = val;
     }
 
-    public void SetValidator(IValidator validater)
-    {
-        this.validator = validater;
-    }
+    public void SetValidator(IValidator validater) => this.validator = validater;
 }

@@ -3,13 +3,8 @@ using HealthXDE.Domain.Patient;
 
 namespace HealthXDE.Domain.Test.Patient;
 
-internal class GeneralPatient : PatientBase
+internal class GeneralPatient(PatientId id) : PatientBase(id)
 {
-    public GeneralPatient(PatientId id) : base(id)
-    {
-        GenderElement.SetValidator(new AdministrativeGenderValueSetR5());
-    }
-
     public Active? Active
     {
         get => ActiveElement.Get<Active?>();
