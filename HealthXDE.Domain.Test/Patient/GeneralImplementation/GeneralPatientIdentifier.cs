@@ -1,7 +1,7 @@
 ﻿using HealthXDE.Domain.DateTime;
 using HealthXDE.Domain.Identifier;
 
-namespace HealthXDE.Domain.Test.Patient;
+namespace HealthXDE.Domain.Test.Patient.GeneralImplementation;
 
 internal record GeneralPatientIdentifier : IdentifierBase
 {

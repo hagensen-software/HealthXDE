@@ -1,7 +1,7 @@
 ﻿using HealthXDE.Domain.Gender;
 using HealthXDE.Domain.Patient;
 
-namespace HealthXDE.Domain.Test.Patient;
+namespace HealthXDE.Domain.Test.Patient.GeneralImplementation;
 
 internal class GeneralPatient(PatientId id) : PatientBase(id)
 {

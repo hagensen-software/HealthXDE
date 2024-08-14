@@ -3,6 +3,8 @@ using HealthXDE.Domain.Exceptions;
 using HealthXDE.Domain.Gender;
 using HealthXDE.Domain.Identifier;
 using HealthXDE.Domain.Patient;
+using HealthXDE.Domain.Test.Patient.GeneralImplementation;
+using HealthXDE.Domain.Test.Patient.ProfiledImplementation;
 
 namespace HealthXDE.Domain.Test.Patient;
 
@@ -36,7 +38,7 @@ public class PatientBehaviour
     public void Given_ASpecialPatient_Then_NoIdentifierIsAssigned()
     {
         var patientId = new PatientId(Guid.NewGuid());
-        var patient = new SpecialPatient(patientId);
+        var patient = new ProfiledPatient(patientId);
 
         Assert.Null(patient.Identifier);
     }
@@ -45,7 +47,7 @@ public class PatientBehaviour
     public void Given_ASpecialPatient_When_ProfiledIdentifierIsAssigned_Then_IdentifierIsSet()
     {
         var patientId = new PatientId(Guid.NewGuid());
-        var patient = new SpecialPatient(patientId)
+        var patient = new ProfiledPatient(patientId)
         {
             Identifier = new ProfiledIdentifier(new("123456789"))
         };
@@ -78,7 +80,7 @@ public class PatientBehaviour
     public void Given_ASpecialPatient_Then_ActiveIsNotSet()
     {
         var patientId = new PatientId(Guid.NewGuid());
-        var patient = new SpecialPatient(patientId);
+        var patient = new ProfiledPatient(patientId);
 
         Assert.Null(patient.Active);
     }
@@ -87,7 +89,7 @@ public class PatientBehaviour
     public void Given_ASpecialPatient_When_SpecialActiveIsAssigned_Then_ActiveIsSet()
     {
         var patientId = new PatientId(Guid.NewGuid());
-        var patient = new SpecialPatient(patientId)
+        var patient = new ProfiledPatient(patientId)
         {
             Active = new(true, "test")
         };
@@ -157,7 +159,7 @@ public class PatientBehaviour
     public void Given_ASpecialPatient_Then_GenderIsNotSet()
     {
         var patientId = new PatientId(Guid.NewGuid());
-        var patient = new SpecialPatient(patientId);
+        var patient = new ProfiledPatient(patientId);
 
         Assert.Null(patient.Gender);
     }
@@ -169,7 +171,7 @@ public class PatientBehaviour
         var male = AdministrativeGenderCoding.ValueSet.Male;
 
         var patientId = new PatientId(Guid.NewGuid());
-        var patient = new SpecialPatient(patientId)
+        var patient = new ProfiledPatient(patientId)
         {
             Gender = male
         };

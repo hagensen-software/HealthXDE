@@ -1,5 +1,6 @@
 ﻿using HealthXDE.Domain.Exceptions;
 using HealthXDE.Domain.Gender;
+using HealthXDE.Domain.Test.Patient.ProfiledImplementation;
 
 namespace HealthXDE.Domain.Test.Patient;
 
@@ -54,10 +55,10 @@ public class GenderBehavior
     [Fact]
     public void Given_AValidAdministrativeGenderCodingInConstrainedValueSet_When_Validated_Then_GenderIsUnchanged()
     {
-        var element = new Element<SpecialAdministrativeGender>();
-        element.SetValidator(new SpecialAdministrativeGenderValueSet());
+        var element = new Element<ProfiledAdministrativeGender>();
+        element.SetValidator(new ProfiledAdministrativeGenderValueSet());
 
-        SpecialAdministrativeGender administrativeGenderCoding = new AdministrativeGenderValueSet().Male;
+        ProfiledAdministrativeGender administrativeGenderCoding = new AdministrativeGenderValueSet().Male;
 
         element.Set(administrativeGenderCoding);
 
@@ -67,10 +68,10 @@ public class GenderBehavior
     [Fact]
     public void Given_AValidAdministrativeGenderCodingNotInValueSet_When_Validated_Then_AnExceptionIsThrown()
     {
-        var element = new Element<SpecialAdministrativeGender>();
-        element.SetValidator(new SpecialAdministrativeGenderValueSet());
+        var element = new Element<ProfiledAdministrativeGender>();
+        element.SetValidator(new ProfiledAdministrativeGenderValueSet());
 
-        SpecialAdministrativeGender administrativeGenderCoding = new AdministrativeGenderValueSet().Other;
+        ProfiledAdministrativeGender administrativeGenderCoding = new AdministrativeGenderValueSet().Other;
 
         Assert.Throws<InvalidCodingException>(() => element.Set(administrativeGenderCoding));
     }

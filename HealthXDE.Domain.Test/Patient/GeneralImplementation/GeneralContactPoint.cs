@@ -1,7 +1,7 @@
 ﻿using HealthXDE.Domain.ContactPoint;
 using HealthXDE.Domain.DateTime;
 
-namespace HealthXDE.Domain.Test.Patient;
+namespace HealthXDE.Domain.Test.Patient.GeneralImplementation;
 
 internal record GeneralContactPoint : ContactPointBase
 {

@@ -1,6 +1,6 @@
 ﻿using HealthXDE.Domain.Identifier;
 
-namespace HealthXDE.Domain.Test.Patient;
+namespace HealthXDE.Domain.Test.Patient.ProfiledImplementation;
 
 internal record ProfiledIdentifier : IdentifierBase
 {

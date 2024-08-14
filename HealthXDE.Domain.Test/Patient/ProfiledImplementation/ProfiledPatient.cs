@@ -2,11 +2,11 @@
 using HealthXDE.Domain.Gender;
 using HealthXDE.Domain.Patient;
 
-namespace HealthXDE.Domain.Test.Patient;
+namespace HealthXDE.Domain.Test.Patient.ProfiledImplementation;
 
 internal record SpecialActive(bool Value, string Special) : Active(Value);
 
-internal class SpecialAdministrativeGenderValueSet : AdministrativeGenderValueSet
+internal class ProfiledAdministrativeGenderValueSet : AdministrativeGenderValueSet
 {
     internal static readonly string[] sourceArray = ["male", "female"];
 
@@ -16,22 +16,22 @@ internal class SpecialAdministrativeGenderValueSet : AdministrativeGenderValueSe
     }
 }
 
-internal record SpecialAdministrativeGender : AdministrativeGenderCode
+internal record ProfiledAdministrativeGender : AdministrativeGenderCode
 {
-    private static readonly SpecialAdministrativeGenderValueSet specialAdministrativeGenderValueSet = new();
+    private static readonly ProfiledAdministrativeGenderValueSet specialAdministrativeGenderValueSet = new();
 
-    public SpecialAdministrativeGender(Code? code)
+    public ProfiledAdministrativeGender(Code? code)
         : base(code) { }
 
-    public static implicit operator SpecialAdministrativeGender(AdministrativeGenderCoding administrativeGenderCoding)
+    public static implicit operator ProfiledAdministrativeGender(AdministrativeGenderCoding administrativeGenderCoding)
     {
-        return new SpecialAdministrativeGender(administrativeGenderCoding.Code);
+        return new ProfiledAdministrativeGender(administrativeGenderCoding.Code);
     }
 }
 
-internal class SpecialPatient : PatientBase
+internal class ProfiledPatient : PatientBase
 {
-    public SpecialPatient(PatientId id) : base(id) { }
+    public ProfiledPatient(PatientId id) : base(id) { }
 
     public SpecialActive? Active
     {
@@ -50,9 +50,9 @@ internal class SpecialPatient : PatientBase
         }
     }
 
-    public SpecialAdministrativeGender? Gender
+    public ProfiledAdministrativeGender? Gender
     {
-        get => GenderElement.Get<SpecialAdministrativeGender?>();
+        get => GenderElement.Get<ProfiledAdministrativeGender?>();
         set => GenderElement.Set(value);
     }
 
