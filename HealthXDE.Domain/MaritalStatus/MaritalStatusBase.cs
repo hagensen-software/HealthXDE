@@ -2,4 +2,4 @@
 
 namespace HealthXDE.Domain.MaritalStatus;
 
-public record MaritalStatusBase(CodingList Codings, CodeableConceptText? Text) : ICodeableConcept;
+public record MaritalStatusBase(CodingList<MaritalStatusCoding> Codings, CodeableConceptText? Text) : ICodeableConcept<MaritalStatusCoding>;

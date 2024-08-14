@@ -22,14 +22,14 @@ public record IdentifierBase : IValidatable
         this.period = period;
     }
 
-    protected IdentifierUse? GetUse() => use;
-    protected IdentifierType? GetIdentifierType() => type;
-    protected IdentifierSystem? GetSystem() => system;
-    protected IdentifierValue? GetValue() => value;
-    protected Period? GetPeriod() => period;
+    protected internal IdentifierUse? GetUse() => use;
+    protected internal IdentifierType? GetIdentifierType() => type;
+    protected internal IdentifierSystem? GetSystem() => system;
+    protected internal IdentifierValue? GetValue() => value;
+    protected internal Period? GetPeriod() => period;
 
     public void Validate(IValidator? validator = null)
     {
-        use?.Validate(validator ?? IdentifierUse.ValueSet);
+        validator?.Validate(this);
     }
 }

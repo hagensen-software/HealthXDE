@@ -8,7 +8,7 @@ using HealthXDE.Domain.Test.Patient.ProfiledImplementation;
 
 namespace HealthXDE.Domain.Test.Patient;
 
-public class PatientBehaviour
+public class PatientBehavior
 {
     [Fact]
     public void Given_AGeneralPatient_Then_NoIdentifiersAreAssigned()

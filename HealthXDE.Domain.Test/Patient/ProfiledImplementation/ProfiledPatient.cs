@@ -12,7 +12,7 @@ internal class ProfiledAdministrativeGenderValueSet : AdministrativeGenderValueS
 
     protected override Func<AdministrativeGenderCoding, bool> GetFilter()
     {
-        return c => sourceArray.Contains(c.Code?.Symbol);
+        return c => sourceArray.Contains(c.Code?.Value);
     }
 }
 

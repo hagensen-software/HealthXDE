@@ -1,8 +1,5 @@
-﻿using HealthXDE.Domain.CodeableConcept;
+﻿namespace HealthXDE.Domain.Identifier;
 
-namespace HealthXDE.Domain.Identifier;
-
-public record IdentifierType(CodingList Codings, CodeableConceptText? Text) : ICodeableConcept;
 public record IdentifierValue(string Value);
 
 public record IdentifierSystem(Uri Uri)

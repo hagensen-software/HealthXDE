@@ -26,7 +26,9 @@ public class PatientBase : Entity
 
     protected PatientBase(PatientId id)
     {
+        IdentifierElements.SetValidator(new IdentifierValidator());
         GenderElement.SetValidator(AdministrativeGenderCoding.ValueSet);
+        MaritalStatusElement.SetValidator(MaritalStatusValueSet.R5);
 
         Id = id;
     }

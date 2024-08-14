@@ -29,7 +29,10 @@ public class ValueSet<CodingType> : IValidator
     {
         var filter = GetFilter();
         var result = codingValues.Where(c => filter(c)).ToList();
-        result.AddRange(GetExtensions());
+
+        if (!required)
+            result.AddRange(GetExtensions());
+
         return result.ToImmutableList();
     }
 
@@ -44,6 +47,7 @@ public class ValueSet<CodingType> : IValidator
         return result ?? throw new InvalidOperationException($"Not able to lookup code '{code}' - not found and no mapping exists");
     }
 
+    public bool IsEmpty(SimpleCodingBase coding) => string.IsNullOrEmpty(coding.GetCode()?.Value);
     public bool IsValid(SimpleCodingBase coding)
     {
         var values = GetCodingValues();
@@ -57,6 +61,8 @@ public class ValueSet<CodingType> : IValidator
 
         var coding = (validatable as SimpleCodingBase) ?? throw new InvalidOperationException("ValueSets can only validate codes and codings");
 
+        if (IsEmpty(coding))
+            throw new EmptyCodingException();
         if (!IsValid(coding))
             throw new InvalidCodingException($"Code '{coding.GetCode()}' is not a valid code");
     }

@@ -32,9 +32,9 @@ public record CodingBase : SimpleCodingBase
         var codingValue = codedValue as CodingBase;
 
         return  ((system is null) || (codingValue?.system?.Uri == system.Uri)) &&
-                ((version is null) || (codingValue?.version?.Version == version.Version)) &&
-                ((GetCode() is null) || (codingValue?.GetCode()?.Symbol == GetCode()?.Symbol)) &&
-                ((display is null) || (codingValue?.display?.Text == display.Text)) &&
-                ((userSelected is null) || ((codingValue?.userSelected?.ChosenByUser == userSelected.ChosenByUser)));
+                ((version is null) || (codingValue?.version?.Value == version.Value)) &&
+                ((GetCode() is null) || (codingValue?.GetCode()?.Value == GetCode()?.Value)) &&
+                ((display is null) || (codingValue?.display?.Value == display.Value)) &&
+                ((userSelected is null) || ((codingValue?.userSelected?.Value == userSelected.Value)));
     }
 }

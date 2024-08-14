@@ -1,7 +1,7 @@
 ﻿namespace HealthXDE.Domain.CodeableConcept;
 
-public interface ICodeableConcept
+public interface ICodeableConcept<CodingBaseType> where CodingBaseType : CodingBase
 {
-    CodingList Codings { get; init; }
+    CodingList<CodingBaseType> Codings { get; init; }
     CodeableConceptText? Text { get; init; }
 }

@@ -24,7 +24,7 @@ public record SimpleCodingBase : IValidatable
         this.ThrowIfEmpty();
         codedValue.ThrowIfEmpty();
 
-        return code!.Symbol == codedValue.code!.Symbol;
+        return code!.Value == codedValue.code!.Value;
     }
 
     public void Validate(IValidator? validator) => validator?.Validate(this);

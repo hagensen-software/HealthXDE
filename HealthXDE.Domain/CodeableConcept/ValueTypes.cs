@@ -1,10 +1,10 @@
 ﻿namespace HealthXDE.Domain.CodeableConcept;
 
-public record CodeableConceptText(string Text);
-public record CodingVersion(string Version);
-public record DisplayValue(string Text);
-public record UserSelected(bool ChosenByUser);
-public record Code(string Symbol);
+public record CodeableConceptText(string Value);
+public record CodingVersion(string Value);
+public record DisplayValue(string Value);
+public record UserSelected(bool Value);
+public record Code(string Value);
 
 public record CodingSystem(Uri Uri)
 {
