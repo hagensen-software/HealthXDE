@@ -1,11 +1,11 @@
 ﻿using HealthXDE.Domain.DateTime;
 using HealthXDE.Domain.Identifier;
 
-namespace HealthXDE.Domain.Test.Identifier.GeneralImplementation;
+namespace HealthXDE.Domain.Test.Identifier;
 
-public record GeneralIdentifier : IdentifierBase
+public record Identifier : IdentifierBase
 {
-    public GeneralIdentifier(IdentifierUse? use, IdentifierType? type, IdentifierSystem? system, IdentifierValue? value, Period? period)
+    public Identifier(IdentifierUse? use, IdentifierType? type, IdentifierSystem? system, IdentifierValue? value, Period? period)
         : base(use, type, system, value, period) { }
 
     public IdentifierUse? Use => GetUse();

@@ -1,8 +1,9 @@
-﻿using HealthXDE.Domain.DateTime;
+﻿using HealthXDE.Domain.Abstractions;
+using HealthXDE.Domain.DateTime;
 
 namespace HealthXDE.Domain.Address;
 
-public record AddressBase
+public record AddressBase : IValidatable
 {
     private readonly AddressUse? addressUse;
     private readonly AddressType? addressType;
@@ -39,14 +40,19 @@ public record AddressBase
         this.period = period;
     }
 
-    protected AddressUse? GetUse() => addressUse;
-    protected AddressType? GetAddressType() => addressType;
-    protected AddressText? GetAddressText() => addressText;
-    protected AddressLineList GetLines() => addressLineList;
-    protected AddressCity? GetAddressCity() => addressCity;
-    protected AddressDistrict? GetAddressDistrict() => addressDistrict;
-    protected AddressState? GetAddressState() => addressState;
-    protected AddressPostalCode? GetAddressPostalCode() => addressPostalCode;
-    protected AddressCountry? GetAddressCountry() => addressCountry;
-    protected Period? GetPeriod() => period;
+    protected internal AddressUse? GetUse() => addressUse;
+    protected internal AddressType? GetAddressType() => addressType;
+    protected internal AddressText? GetAddressText() => addressText;
+    protected internal AddressLineList GetLines() => addressLineList;
+    protected internal AddressCity? GetAddressCity() => addressCity;
+    protected internal AddressDistrict? GetAddressDistrict() => addressDistrict;
+    protected internal AddressState? GetAddressState() => addressState;
+    protected internal AddressPostalCode? GetAddressPostalCode() => addressPostalCode;
+    protected internal AddressCountry? GetAddressCountry() => addressCountry;
+    protected internal Period? GetPeriod() => period;
+
+    public void Validate(IValidator? validator = null)
+    {
+        validator?.Validate(this);
+    }
 }

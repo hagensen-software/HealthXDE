@@ -28,6 +28,7 @@ public class PatientBase : Entity
     {
         IdentifierElements.SetValidator(new IdentifierValidator());
         GenderElement.SetValidator(AdministrativeGenderCoding.ValueSet);
+        AddressElement.SetValidator(new AddressValidator());
         MaritalStatusElement.SetValidator(MaritalStatusValueSet.R5);
 
         Id = id;

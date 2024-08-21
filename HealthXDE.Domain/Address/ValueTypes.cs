@@ -1,19 +1,15 @@
-﻿namespace HealthXDE.Domain.Address;
+﻿using HealthXDE.Domain.CodeableConcept;
 
-public enum AddressUse
+namespace HealthXDE.Domain.Address;
+
+public record AddressUse(Code? Code) : SimpleCodingBase(Code)
 {
-    Home,
-    Work,
-    Temp,
-    Old,
-    Billing
+    public static AddressUseValueSet ValueSet = new();
 }
 
-public enum AddressType
+public record AddressType(Code? Code) : SimpleCodingBase(Code)
 {
-    Postal,
-    Physical,
-    Both
+    public static AddressTypeValueSet ValueSet = new();
 }
 
 public record AddressText(string text);
